@@ -1,15 +1,18 @@
 {
   "name": "todo-app",
-  "version": "1.0.0",
-  "description": "todo app to practice rest API with express and mongodb",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "Jean-Pierre Sierens",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0",
-    "mongoose": "^4.5.8"
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.4.1",
+    "express": "~4.13.4",
+    "mongoose": "^4.5.10",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
   }
 }
