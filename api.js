@@ -11,10 +11,6 @@ const todos = require('./routes/todos');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 // MongoDB
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/todo-api')
