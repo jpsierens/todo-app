@@ -1,6 +1,17 @@
-.filterable-table {
+.todos {
 	padding: 20px;
 	background-color: beige;
+}
+
+.todo {
+	padding: 10px;
+	background: white;
+	border-radius: 5px;
+
+	.status {
+		color: gray;
+		font-style: italic;
+	}
 }
 
 footer {

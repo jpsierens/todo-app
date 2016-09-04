@@ -1,23 +1,21 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { filterTable } from '../actions';
+import Todo from '../components/Todo';
 
-const Todos = () => {
-    return (
-        <div className="filterable-table">
-            hola
-        </div>
-    );
-};
+const Todos = ({ todos }) =>
+    <div className="todos">
+        { todos.map(t => <Todo key={t.updated_at} {...t} />) }
+    </div>;
 
 Todos.propTypes = {
-    filter: PropTypes.string,
+    todos: PropTypes.array,
     onFilter: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
     return {
-        filter: state.filter
+        todos: state.todos
     };
 };
 

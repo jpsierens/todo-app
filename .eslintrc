@@ -127,7 +127,7 @@
     "quotes": [
       2, "single", "avoid-escape"    // http://eslint.org/docs/rules/quotes
     ],
-    "camelcase": [2, {               // http://eslint.org/docs/rules/camelcase
+    "camelcase": [0, {               // http://eslint.org/docs/rules/camelcase
       "properties": "never"
     }],
     "comma-spacing": [2, {           // http://eslint.org/docs/rules/comma-spacing
@@ -150,7 +150,7 @@
     "no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
     "no-new-object": 2,              // http://eslint.org/docs/rules/no-new-object
     "no-spaced-func": 2,             // http://eslint.org/docs/rules/no-spaced-func
-    "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
+    "no-trailing-spaces": 1,         // http://eslint.org/docs/rules/no-trailing-spaces
     "no-extra-parens": [2, "functions"], // http://eslint.org/docs/rules/no-extra-parens
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
     "one-var": [2, "never"],         // http://eslint.org/docs/rules/one-var
