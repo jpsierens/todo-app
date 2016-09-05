@@ -144,7 +144,7 @@
     "new-cap": [0, {                 // http://eslint.org/docs/rules/new-cap
       "newIsCap": true
     }],
-    "no-multiple-empty-lines": [2, { // http://eslint.org/docs/rules/no-multiple-empty-lines
+    "no-multiple-empty-lines": [0, { // http://eslint.org/docs/rules/no-multiple-empty-lines
       "max": 2
     }],
     "no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
