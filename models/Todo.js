@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 // Schema to enforce consistent structure.
 const TodoSchema = new mongoose.Schema({
   name: String,
-  completed: Boolean,
-  note: String,
+  completed: { type: Boolean, default: false },
+  note: { type: String, default: '' },
   updated_at: { type: Date, default: Date.now },
 });
 

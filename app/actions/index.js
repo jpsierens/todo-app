@@ -1,8 +1,8 @@
 import * as types from './types';
 
-export function filterTable(filter) {
+export function addTodo(todo) {
     return {
-        type: types.FILTER,
-        filter
+        type: types.ADD_TODO_CLICK,
+        data: todo
     };
 }

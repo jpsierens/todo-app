@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 
-const handleSubmit = (name, note, onCreate) => {
+const handleSubmit = (nameInput, noteInput, onCreate) => {
+    const name = nameInput.value;
+    const note = noteInput.value;
+
     if (!name || !note) return;
 
     onCreate({ name, note });
 };
 
 const CreateTodo = ({ onCreate }) => {
-    let name;
-    let note;
+    let nameInput;
+    let noteInput;
 
     return (
         <form className="create-todo">
@@ -18,7 +21,7 @@ const CreateTodo = ({ onCreate }) => {
                 placeholder="Title"
                 required
                 ref={r => {
-                    name = r;
+                    nameInput = r;
                 }} />
 
             <textarea
@@ -26,15 +29,17 @@ const CreateTodo = ({ onCreate }) => {
                 placeholder="Note"
                 required
                 ref={r => {
-                    note = r;
+                    noteInput = r;
                 }}>
             </textarea>
 
             <button
                 type="submit"
-                onClick={() =>
-                    handleSubmit(name, note, onCreate)}>
-                
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(nameInput, noteInput, onCreate);
+                }}>
+
                 SUBMIT
             </button>
         </form>

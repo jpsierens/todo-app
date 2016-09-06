@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createTodo } from '../actions';
+import { addTodo } from '../actions';
 import Todos from '../components/Todos';
 
 const mapStateToProps = (state) => {
@@ -8,9 +8,15 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddTodo: (todo) => dispatch(addTodo(todo))
+    };
+};
+
 const TodosContainer = connect(
     mapStateToProps,
-    { createTodo }
+    mapDispatchToProps
 )(Todos);
 
 export default TodosContainer;

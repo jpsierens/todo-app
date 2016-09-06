@@ -1,1 +1,4 @@
-export const FILTER = 'FILTER';
+export const ADD_TODO_CLICK = 'ADD_TODO_CLICK';
+export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
+export const ADD_TODO_FAILED = 'ADD_TODO_FAILED';
