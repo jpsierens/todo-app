@@ -13,35 +13,37 @@ router.get('/', function(req, res, next) {
 
 /* POST /todos */
 router.post('/', function(req, res, next) {
-  Todo.create(req.body, function (err, post) {
+  Todo.create(req.body, function (err, todo) {
     if (err) return next(err);
     console.log('New Todo created:');
-    console.log(post);
-    res.json(post);
+    console.log(todo);
+    res.json(todo);
   });
 });
 
 /* GET /todos/id */
 router.get('/:id', function(req, res, next) {
-  Todo.findById(req.params.id, function (err, post) {
+  Todo.findById(req.params.id, function (err, todo) {
     if (err) return next(err);
-    res.json(post);
+    res.json(todo);
   });
 });
 
 /* PUT /todos/:id */
 router.put('/:id', function(req, res, next) {
-  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, todo) {
     if (err) return next(err);
-    res.json(post);
+    res.json(todo);
   });
 });
 
 /* DELETE /todos/:id */
 router.delete('/:id', function(req, res, next) {
-  Todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Todo.findByIdAndRemove(req.params.id, req.body, function (err, todo) {
     if (err) return next(err);
-    res.json(post);
+    console.log('Todo deleted:');
+    console.log(todo);
+    res.json(todo);
   });
 });
 

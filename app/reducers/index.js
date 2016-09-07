@@ -7,6 +7,8 @@ const todos = (state = [], action) => {
     switch (action.type) {
         case types.ADD_TODO_SUCCESS:
             return [...state, action.data];
+        case types.REMOVE_TODO_SUCCESS:
+            return state.filter((t) => t._id !== action.data._id );
         default:
             return state;
     }

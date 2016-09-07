@@ -1,6 +1,10 @@
 import fetch from 'isomorphic-fetch';
 
 const TODOS_URL = 'http://localhost:3001/todos';
+const jsonHeaders = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+};
 
 export async function getTodos() {
     try {
@@ -18,14 +22,27 @@ export async function postTodo(todo) {
         const options = {
             mode: 'cors',
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: jsonHeaders,
             body: JSON.stringify(todo)
         };
 
         const response = await fetch(TODOS_URL, options);
+
+        return await response.json();
+    } catch(e) {
+        throw e;
+    }
+}
+
+export async function deleteTodo(id) {
+    try {
+        const options = {
+            mode: 'cors',
+            method: 'DELETE',
+            headers: jsonHeaders
+        };
+
+        const response = await fetch(`${ TODOS_URL }/${id}`, options);
 
         return await response.json();
     } catch(e) {

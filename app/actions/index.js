@@ -6,3 +6,10 @@ export function addTodo(todo) {
         data: todo
     };
 }
+
+export function removeTodo(id) {
+    return {
+        type: types.REMOVE_TODO_CLICK,
+        id
+    };
+}
