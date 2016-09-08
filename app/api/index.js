@@ -34,6 +34,23 @@ export async function postTodo(todo) {
     }
 }
 
+export async function updateTodo(id, update) {
+    try {
+        const options = {
+            mode: 'cors',
+            method: 'PUT',
+            headers: jsonHeaders,
+            body: JSON.stringify(update)
+        };
+
+        const response = await fetch(`${ TODOS_URL }/${id}`, options);
+
+        return await response.json();
+    } catch(e) {
+        throw e;
+    }
+}
+
 export async function deleteTodo(id) {
     try {
         const options = {

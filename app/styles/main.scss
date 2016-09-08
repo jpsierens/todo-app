@@ -31,6 +31,7 @@ button {
     padding: 0 12px;
     color: white;
     font-weight: bold;
+	text-transform: uppercase;
 	background: #cec3bf;
     border: 0;
     border-radius: 3px;
@@ -53,6 +54,7 @@ form {
 	padding: 10px 45px 10px 10px;
 	background: white;
 	border-radius: 5px;
+	overflow: hidden;
 
 	h2 {
     	margin: 10px 0;
@@ -62,12 +64,10 @@ form {
 		margin: 10px 0;
     	color: #2f2f2f;
 	}
-	.status {
-		color: gray;
-		font-style: italic;
-	}
 	.datetime {
 		margin-left: 20px;
+		color: gray;
+		font-style: italic;
 	}
 	.close-todo {
 		position: absolute;
@@ -75,6 +75,10 @@ form {
 		right: 20px;
 		cursor: pointer;
 	}
+}
+
+.todo.done {
+	background: #cefdb1;
 }
 
 footer {

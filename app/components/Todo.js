@@ -1,21 +1,30 @@
 import React, { PropTypes } from 'react';
 
-const Todo = ({ name, note, completed, updatedAt, onRemove, _id }) => {
+const Todo = ({ _id, name, note, completed, updatedAt, onRemove, toggleStatus }) => {
     const time = new Date(updatedAt);
 
     return (
-        <div className="todo">
+        <div className={`todo ${ completed ? 'done' : ''}`}>
             <h2> { name } </h2>
             <p> { note} </p>
-            <div className="status">
-                Status: { completed ? 'Done' : 'Not Done'}
+            <div>
+                <button
+                    className="btn-status"
+                    onClick={() => toggleStatus(_id, completed)}>
+
+                    Status: { completed ? 'Done' : 'Not Done'}
+                </button>
                 <span className="datetime">
                     Last Updated: { time.toLocaleString() }
                 </span>
             </div>
             <span
                 className="close-todo"
-                onClick={() => onRemove(_id)}>
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onRemove(_id);
+                }}>
+
                 X
             </span>
         </div>
@@ -28,7 +37,8 @@ Todo.propTypes = {
     note: PropTypes.string,
     completed: PropTypes.bool,
     updatedAt: PropTypes.string,
-    onRemove: PropTypes.func
+    onRemove: PropTypes.func,
+    toggleStatus: PropTypes.func
 };
 
 export default Todo;

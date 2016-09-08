@@ -1,13 +1,13 @@
 import { takeEvery } from 'redux-saga';
 import { put, call } from 'redux-saga/effects';
-import { postTodo, deleteTodo } from '../api';
+import { postTodo, deleteTodo, updateTodo } from '../api';
 import * as types from './types';
 
 function* handleServerResponse(todo, success, failed, errorMsg) {
     if (todo.name) {
         yield put({
             type: success,
-            data: todo
+            todo
         });
     } else {
         yield put({
@@ -59,15 +59,34 @@ function* watchRemoveTodo() {
     yield* takeEvery(types.REMOVE_TODO_CLICK, removeTodo);
 }
 
-function* helloSaga() {
-    console.log('Hello Sagas!');
+function* toggleStatus(action) {
+    try {
+        const todo = yield call(updateTodo, action.id, {
+            completed: !action.status
+        });
+        yield* handleServerResponse(
+            todo,
+            types.TOGGLE_TODO_STATUS_SUCCESS,
+            types.TOGGLE_TODO_STATUS_FAILED,
+            'NETWORK ERROR: Todo status wasn\'t updated'
+        );
+    } catch(e) {
+        yield put({
+            type: types.TOGGLE_TODO_STATUS_FAILED,
+            error: e
+        });
+    }
+}
+
+function* watchToggleStatus() {
+    yield* takeEvery(types.TOGGLE_TODO_STATUS, toggleStatus);
 }
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
     yield [
-        helloSaga(),
         watchAddTodo(),
-        watchRemoveTodo()
+        watchRemoveTodo(),
+        watchToggleStatus()
     ];
 }

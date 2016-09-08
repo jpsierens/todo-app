@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Todo from './Todo';
 import CreateTodo from './CreateTodo';
 
-const Todos = ({ todos, onAddTodo, onRemoveTodo }) =>
+const Todos = ({ todos, onAddTodo, onRemoveTodo, toggleStatus }) =>
     <div className="todos">
         <CreateTodo onCreate={onAddTodo} />
         {
@@ -10,6 +10,7 @@ const Todos = ({ todos, onAddTodo, onRemoveTodo }) =>
                 <Todo
                     key={t.updatedAt}
                     onRemove={onRemoveTodo}
+                    toggleStatus={toggleStatus}
                     {...t}/>
             )
         }
@@ -18,7 +19,8 @@ const Todos = ({ todos, onAddTodo, onRemoveTodo }) =>
 Todos.propTypes = {
     todos: PropTypes.array,
     onAddTodo: PropTypes.func,
-    onRemoveTodo: PropTypes.func
+    onRemoveTodo: PropTypes.func,
+    toggleStatus: PropTypes.func
 };
 
 export default Todos;

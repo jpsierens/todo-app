@@ -13,3 +13,11 @@ export function removeTodo(id) {
         id
     };
 }
+
+export function toggleStatus(id, completed) {
+    return {
+        type: types.TOGGLE_TODO_STATUS,
+        status: completed,
+        id
+    };
+}
