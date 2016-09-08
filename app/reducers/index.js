@@ -6,7 +6,7 @@ import * as types from '../actions/types';
 const todos = (state = [], action) => {
     switch (action.type) {
         case types.ADD_TODO_SUCCESS:
-            return [...state, action.data];
+            return [action.data, ...state];
         case types.REMOVE_TODO_SUCCESS:
             return state.filter((t) => t._id !== action.data._id );
         default:

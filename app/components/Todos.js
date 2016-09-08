@@ -7,7 +7,10 @@ const Todos = ({ todos, onAddTodo, onRemoveTodo }) =>
         <CreateTodo onCreate={onAddTodo} />
         {
             todos.map(t =>
-                <Todo key={t.updatedAt} onRemove={onRemoveTodo} {...t} />
+                <Todo
+                    key={t.updatedAt}
+                    onRemove={onRemoveTodo}
+                    {...t}/>
             )
         }
     </div>;
