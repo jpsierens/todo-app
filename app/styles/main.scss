@@ -76,10 +76,12 @@ form {
 		right: 20px;
 		cursor: pointer;
 	}
-}
-
-.todo.done {
-	background: #cefdb1;
+	&.done {
+		background: #cefdb1;
+	}
+	&.dragging {
+		opacity: 0.2;
+	}
 }
 
 footer {

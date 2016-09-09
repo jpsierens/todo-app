@@ -21,6 +21,15 @@ const todos = (state = [], action) => {
                 return t;
             });
 
+        case types.MOVE_TODO:
+            const newState = [...state];
+            newState.splice(action.dragIndex, 1);
+            return [
+                ...newState.slice(0, action.hoverIndex),
+                action.todo,
+                ...newState.slice(action.hoverIndex)
+            ];
+
         default:
             return state;
     }

@@ -21,3 +21,12 @@ export function toggleStatus(id, completed) {
         id
     };
 }
+
+export function moveTodo(dragIndex, hoverIndex, todo) {
+    return {
+        type: types.MOVE_TODO,
+        dragIndex,
+        hoverIndex,
+        todo
+    };
+}
