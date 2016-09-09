@@ -62,7 +62,8 @@ function* watchRemoveTodo() {
 function* toggleStatus(action) {
     try {
         const todo = yield call(updateTodo, action.id, {
-            completed: !action.status
+            completed: !action.status,
+            updatedAt: Date.now()
         });
         yield* handleServerResponse(
             todo,
