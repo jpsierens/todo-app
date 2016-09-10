@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
         initialState,
         compose(
             applyMiddleware(sagaMiddleware),
-            DevTools.instrument()
+            window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
         )
     );
 
