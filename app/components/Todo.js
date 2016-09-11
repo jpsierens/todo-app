@@ -83,7 +83,7 @@ const Todo = (props) => {
             <div>
                 <button
                     className="btn-status"
-                    onClick={() => toggleStatus(_id, completed)}>
+                    onClick={() => toggleStatus(_id)}>
 
                     Status: { completed ? 'Done' : 'Not Done'}
                 </button>

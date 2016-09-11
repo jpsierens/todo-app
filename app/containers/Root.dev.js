@@ -5,6 +5,11 @@ import { Router } from 'react-router';
 import routes from '../routes';
 
 export default class Root extends Component {
+    static propTypes = {
+        store: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
+    };
+
     render() {
         const { store, history } = this.props;
         return (
@@ -17,8 +22,3 @@ export default class Root extends Component {
         );
     }
 }
-
-Root.propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
-};
