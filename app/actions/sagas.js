@@ -4,7 +4,7 @@ import { postTodo, deleteTodo, updateTodo } from '../api';
 import * as types from './types';
 
 function* handleServerResponse(todo, success, failed, errorMsg) {
-    if (todo.name) {
+    if (todo && todo.name) {
         yield put({
             type: success,
             todo
@@ -20,6 +20,7 @@ function* handleServerResponse(todo, success, failed, errorMsg) {
 export function* addTodo(action) {
     try {
         const todo = yield call(postTodo, action.data);
+        console.log(todo);
         yield* handleServerResponse(
             todo,
             types.ADD_TODO_SUCCESS,

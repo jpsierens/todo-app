@@ -50,11 +50,14 @@ describe('sync actions', () => {
     describe('toggle status', () => {
         it('should create an action to toggle a todo\'s status', () => {
             const id = "someid123";
+            const completed = false;
             const expectedAction = {
                 type: types.TOGGLE_TODO_STATUS,
+                completed,
                 id
             };
-            expect(actions.toggleStatus(id)).toEqual(expectedAction);
+            expect(actions.toggleStatus(id, completed))
+                .toEqual(expectedAction);
         })
     });
 
