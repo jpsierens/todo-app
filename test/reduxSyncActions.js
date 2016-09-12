@@ -12,7 +12,7 @@ describe('sync actions', () => {
     }
 
     describe('addTodo', () => {
-        it('should create an action to add a Todo', () => {
+        it('should create an action to add a todo', () => {
             const expectedAction = {
                 type: types.ADD_TODO_CLICK,
                 data: todo
@@ -22,7 +22,7 @@ describe('sync actions', () => {
     });
 
     describe('removeTodo', () => {
-        it('should create an action to remove a Todo', () => {
+        it('should create an action to remove a todo', () => {
             const id = "someid123";
             const expectedAction = {
                 type: types.REMOVE_TODO_CLICK,
@@ -33,7 +33,7 @@ describe('sync actions', () => {
     });
 
     describe('moveTodo', () => {
-        it('should create an action to move a Todo', () => {
+        it('should create an action to move a todo', () => {
             const dragIndex = 1;
             const hoverIndex = 2;
             const expectedAction = {
@@ -48,7 +48,7 @@ describe('sync actions', () => {
     });
 
     describe('toggle status', () => {
-        it('should create an action to toggle a todos status', () => {
+        it('should create an action to toggle a todo\'s status', () => {
             const id = "someid123";
             const expectedAction = {
                 type: types.TOGGLE_TODO_STATUS,

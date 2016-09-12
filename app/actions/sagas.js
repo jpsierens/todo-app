@@ -17,7 +17,7 @@ function* handleServerResponse(todo, success, failed, errorMsg) {
     }
 }
 
-function* addTodo(action) {
+export function* addTodo(action) {
     try {
         const todo = yield call(postTodo, action.data);
         yield* handleServerResponse(
@@ -38,7 +38,7 @@ function* watchAddTodo() {
     yield* takeEvery(types.ADD_TODO_CLICK, addTodo);
 }
 
-function* removeTodo(action) {
+export function* removeTodo(action) {
     try {
         const todo = yield call(deleteTodo, action.id);
         yield* handleServerResponse(
@@ -59,10 +59,10 @@ function* watchRemoveTodo() {
     yield* takeEvery(types.REMOVE_TODO_CLICK, removeTodo);
 }
 
-function* toggleStatus(action) {
+export function* toggleStatus(action) {
     try {
         const todo = yield call(updateTodo, action.id, {
-            completed: !action.status,
+            completed: !action.completed,
             updatedAt: Date.now()
         });
         yield* handleServerResponse(
