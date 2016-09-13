@@ -12,10 +12,12 @@ const todos = (state = [], action) => {
             return state.filter((t) => t._id !== action.todo._id );
 
         case types.TOGGLE_TODO_STATUS_SUCCESS:
+            const { completed } = action.todo;
             return state.map(t => {
                 if (t._id === action.todo._id) {
                     return Object.assign({}, action.todo, {
-                        completed: !action.todo.completed
+                        completed: !completed,
+                        updatedAt: Date.now()
                     });
                 }
                 return t;

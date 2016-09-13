@@ -34,7 +34,7 @@ export async function postTodo(todo) {
     }
 }
 
-export async function updateTodo(id, update) {
+export async function putTodo(id, update) {
     try {
         const options = {
             mode: 'cors',

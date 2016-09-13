@@ -68,7 +68,7 @@ const Todo = (props) => {
         completed,
         updatedAt,
         onRemove,
-        toggleStatus,
+        updateTodo,
         connectDragSource,
         isDragging,
         connectDropTarget
@@ -83,7 +83,10 @@ const Todo = (props) => {
             <div>
                 <button
                     className="btn-status"
-                    onClick={() => toggleStatus(_id, completed)}>
+                    onClick={() => updateTodo(_id, {
+                        updatedAt: Date.now(),
+                        completed
+                    })}>
 
                     Status: { completed ? 'Done' : 'Not Done'}
                 </button>
@@ -111,7 +114,7 @@ Todo.propTypes = {
     completed: PropTypes.bool,
     updatedAt: PropTypes.string,
     onRemove: PropTypes.func,
-    toggleStatus: PropTypes.func,
+    updateTodo: PropTypes.func,
     connectDragSource: PropTypes.func,
     isDragging: PropTypes.bool,
     connectDropTarget: PropTypes.func,

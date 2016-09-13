@@ -12,7 +12,7 @@ const handleMoveTodo = (todos, moveTodo, indexes) => {
 
 class Todos extends React.Component {
     render() {
-        const { todos, onAddTodo, onRemoveTodo, toggleStatus, moveTodo } = this.props;
+        const { todos, onAddTodo, onRemoveTodo, updateTodo, moveTodo } = this.props;
 
         return (
             <div className="todos">
@@ -23,7 +23,7 @@ class Todos extends React.Component {
                             key={t.updatedAt}
                             index={i}
                             onRemove={onRemoveTodo}
-                            toggleStatus={toggleStatus}
+                            updateTodo={updateTodo}
                             onMoveTodo={(indexes) => {
                                 handleMoveTodo(todos, moveTodo, indexes);
                             }}
@@ -39,7 +39,7 @@ Todos.propTypes = {
     todos: PropTypes.array,
     onAddTodo: PropTypes.func,
     onRemoveTodo: PropTypes.func,
-    toggleStatus: PropTypes.func,
+    updateTodo: PropTypes.func,
     moveTodo: PropTypes.func
 };
 

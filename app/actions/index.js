@@ -14,10 +14,10 @@ export function removeTodo(id) {
     };
 }
 
-export function toggleStatus(id, completed) {
+export function updateTodo(id, updates) {
     return {
         type: types.TOGGLE_TODO_STATUS,
-        completed,
+        updates,
         id
     };
 }
