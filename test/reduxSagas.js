@@ -18,16 +18,31 @@ describe('redux sagas', () => {
             data: todo
         };
         const generator = sagas.addTodo(action);
+        let returnedTodoId;
 
-        it('should call the postTodo method', () => {
+        it('should execute the call method and return the effect', () => {
             expect(generator.next().value).toEqual(call(postTodo, todo));
         });
 
-        it('should dispatch an ADD_TODO_SUCCESS action', () => {
-            console.log(generator.next().value);
-            expect(generator.next().value.action.type)
-                .toEqual(types.ADD_TODO_SUCCESS);
+        it('should dispatch an ADD_TODO_SUCCESS action', (done) => {
+            postTodo(todo).then(todo => {
+                returnedTodoId = todo._id;
+                expect(generator.next(todo).value.PUT.action)
+                    .toEqual({
+                        type: types.ADD_TODO_SUCCESS,
+                        todo    
+                    });
+                done();
+            });
         });
+
+        it('should be done', () => {
+            // console.log(generator.next().value.PUT.action)
+            expect(generator.next().done).toEqual(true);
+        });
+
+        deleteTodo(returnedTodoId)
+            .catch(e => 'Could not Delete Test todo: '+e);
     });
 
 });
