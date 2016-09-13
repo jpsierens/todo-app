@@ -36,13 +36,17 @@ describe('redux sagas', () => {
             });
         });
 
-        it('should be done', () => {
-            // console.log(generator.next().value.PUT.action)
+        it('should be done', (done) => {
             expect(generator.next().done).toEqual(true);
+            
+            // lets get rid of the test todo.
+            deleteTodo(returnedTodoId)
+                .then(() => done())
+                .catch(e => {
+                    console.log('ERROR removing todo: '+e);
+                    done();
+                });
         });
-
-        deleteTodo(returnedTodoId)
-            .catch(e => 'Could not Delete Test todo: '+e);
     });
 
 });
