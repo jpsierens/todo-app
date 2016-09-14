@@ -7,25 +7,25 @@ import * as types from "../app/actions/types";
 import { postTodo, deleteTodo, updateTodo } from '../app/api';
 
 describe('redux sagas', () => {
+    const todoModel = {
+        name: "test the todos",
+        note: "Testing todos"
+    };
 
     describe('add todo', () => {
-        const todo = {
-            name: "test the todos",
-            note: "Testing todos"
-        };
         const action = {
             type: types.ADD_TODO_CLICK,
-            data: todo
+            data: todoModel
         };
         const generator = sagas.addTodo(action);
         let returnedTodoId;
 
         it('should execute the call method and return the effect', () => {
-            expect(generator.next().value).toEqual(call(postTodo, todo));
+            expect(generator.next().value).toEqual(call(postTodo, todoModel));
         });
 
-        it('should dispatch an ADD_TODO_SUCCESS action', (done) => {
-            postTodo(todo).then(todo => {
+        it('should dispatch an ADD_TODO_SUCCESS action once the todo has been added succesfully', (done) => {
+            postTodo(todoModel).then(todo => {
                 returnedTodoId = todo._id;
                 expect(generator.next(todo).value.PUT.action)
                     .toEqual({
@@ -36,9 +36,11 @@ describe('redux sagas', () => {
             });
         });
 
-        it('should be done', (done) => {
+        it('should be done', () => {
             expect(generator.next().done).toEqual(true);
-            
+        });
+
+        after('delete dummy todo', (done) => {
             // lets get rid of the test todo.
             deleteTodo(returnedTodoId)
                 .then(() => done())
@@ -46,6 +48,42 @@ describe('redux sagas', () => {
                     console.log('ERROR removing todo: '+e);
                     done();
                 });
+        })
+    });
+
+    describe('remove todo', () => {
+        let createdTodo, action, generator;
+
+        before('create a dummy todo and start the generator', (done) => {
+            // create a dummy todo
+            postTodo(todoModel).then(t => {
+                createdTodo = t;
+                action = {
+                    type: types.REMOVE_TODO_CLICK,
+                    id: createdTodo._id
+                };
+                generator = sagas.removeTodo(action);
+                done();
+            })
+        });
+
+        it ('should execute the call method and return the effect', () => {
+            expect(generator.next().value).toEqual(call(deleteTodo, createdTodo._id));
+        });
+
+        it('should dispatch a REMOVE_TODO_SUCCESS action once the todo has been deleted', (done) => {
+            deleteTodo(createdTodo._id).then(todo => {
+                expect(generator.next(todo).value.PUT.action)
+                    .toEqual({
+                        type: types.REMOVE_TODO_SUCCESS,
+                        todo    
+                    });
+                done();
+            });
+        });
+
+        it('should be done', () => {
+            expect(generator.next().done).toEqual(true);
         });
     });
 

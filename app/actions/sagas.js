@@ -42,6 +42,7 @@ function* watchAddTodo() {
 export function* removeTodo(action) {
     try {
         const todo = yield call(deleteTodo, action.id);
+
         yield* handleServerResponse(
             todo,
             types.REMOVE_TODO_SUCCESS,
@@ -68,6 +69,7 @@ export function* updateTodo(action) {
             completed: !completed,
             updatedAt
         });
+        
         yield* handleServerResponse(
             todo,
             types.TOGGLE_TODO_STATUS_SUCCESS,
