@@ -3,17 +3,11 @@ import { put, call } from 'redux-saga/effects';
 import { postTodo, deleteTodo, putTodo } from '../api';
 import * as types from './types';
 
-function* handleServerResponse(todo, success, failed, errorMsg) {
+function* handleServerResponse(todo, success, failed, errorMsg, additional = {}) {
     if (todo && todo.name) {
-        yield put({
-            type: success,
-            todo
-        });
+        yield put(Object.assign({}, { type: success, todo }, additional));
     } else {
-        yield put({
-            type: failed,
-            error: errorMsg
-        });
+        yield put({ type: failed, error: errorMsg });
     }
 }
 
@@ -70,7 +64,8 @@ export function* updateTodo(action) {
             todo,
             types.UPDATE_TODO_SUCCESS,
             types.UPDATE_TODO_FAILED,
-            'NETWORK ERROR: Todo status wasn\'t updated'
+            'NETWORK ERROR: Todo status wasn\'t updated',
+            { updates }
         );
     } catch(e) {
         yield put({

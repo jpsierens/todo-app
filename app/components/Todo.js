@@ -60,6 +60,16 @@ const connectDrop = (connect) => {
     return { connectDropTarget: connect.dropTarget() };
 };
 
+const handleUpdateStatus = (updateTodo, completed, _id) => {
+    const now = new Date();
+    const updatedAt = now.toISOString();
+
+    updateTodo(_id, {
+        updatedAt,
+        completed: !completed
+    });
+};
+
 const Todo = (props) => {
     const {
         _id,
@@ -83,10 +93,7 @@ const Todo = (props) => {
             <div>
                 <button
                     className="btn-status"
-                    onClick={() => updateTodo(_id, {
-                        updatedAt: Date.now(),
-                        completed
-                    })}>
+                    onClick={() => handleUpdateStatus(updateTodo, completed, _id)}>
 
                     Status: { completed ? 'Done' : 'Not Done'}
                 </button>

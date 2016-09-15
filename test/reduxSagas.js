@@ -115,7 +115,8 @@ describe('redux sagas', () => {
                 expect(generator.next(todo).value.PUT.action)
                     .toEqual({
                         type: types.UPDATE_TODO_SUCCESS,
-                        todo    
+                        todo,
+                        updates: action.updates
                     });
                 done();
             });

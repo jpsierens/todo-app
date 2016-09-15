@@ -11,14 +11,11 @@ const todos = (state = [], action) => {
         case types.REMOVE_TODO_SUCCESS:
             return state.filter((t) => t._id !== action.todo._id );
 
-        case types.TOGGLE_TODO_STATUS_SUCCESS:
-            const { completed } = action.todo;
+        case types.UPDATE_TODO_SUCCESS:
+            const { updates, todo } = action;
             return state.map(t => {
-                if (t._id === action.todo._id) {
-                    return Object.assign({}, action.todo, {
-                        completed: !completed,
-                        updatedAt: Date.now()
-                    });
+                if (t._id === todo._id) {
+                    return Object.assign({}, todo, updates);
                 }
                 return t;
             });
