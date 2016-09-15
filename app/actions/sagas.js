@@ -63,29 +63,25 @@ function* watchRemoveTodo() {
 
 export function* updateTodo(action) {
     try {
-        const { id } = action;
-        const { completed, updatedAt } = action.updates;
-        const todo = yield call(putTodo, id, {
-            completed: !completed,
-            updatedAt
-        });
+        const { id, updates } = action;
+        const todo = yield call(putTodo, id, updates);
         
         yield* handleServerResponse(
             todo,
-            types.TOGGLE_TODO_STATUS_SUCCESS,
-            types.TOGGLE_TODO_STATUS_FAILED,
+            types.UPDATE_TODO_SUCCESS,
+            types.UPDATE_TODO_FAILED,
             'NETWORK ERROR: Todo status wasn\'t updated'
         );
     } catch(e) {
         yield put({
-            type: types.TOGGLE_TODO_STATUS_FAILED,
+            type: types.UPDATE_TODO_FAILED,
             error: e
         });
     }
 }
 
 function* watchUpdateTodo() {
-    yield* takeEvery(types.TOGGLE_TODO_STATUS, updateTodo);
+    yield* takeEvery(types.UPDATE_TODO_CLICK, updateTodo);
 }
 
 // single entry point to start all Sagas at once

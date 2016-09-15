@@ -47,12 +47,12 @@ describe('sync actions', () => {
         })
     });
 
-    describe('toggle status', () => {
-        it('should create an action to toggle a todo\'s status', () => {
+    describe('updateTodo', () => {
+        it('should create an action to update a todo', () => {
             const id = "someid123";
             const updates = { completed: false };
             const expectedAction = {
-                type: types.TOGGLE_TODO_STATUS,
+                type: types.UPDATE_TODO_CLICK,
                 updates,
                 id
             };

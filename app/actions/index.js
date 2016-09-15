@@ -16,7 +16,7 @@ export function removeTodo(id) {
 
 export function updateTodo(id, updates) {
     return {
-        type: types.TOGGLE_TODO_STATUS,
+        type: types.UPDATE_TODO_CLICK,
         updates,
         id
     };

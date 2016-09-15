@@ -4,7 +4,7 @@ import { put, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import * as sagas from "../app/actions/sagas";
 import * as types from "../app/actions/types";
-import { postTodo, deleteTodo, updateTodo } from '../app/api';
+import { postTodo, deleteTodo, putTodo } from '../app/api';
 
 describe('redux sagas', () => {
     const todoModel = {
@@ -85,6 +85,42 @@ describe('redux sagas', () => {
         it('should be done', () => {
             expect(generator.next().done).toEqual(true);
         });
+    });
+
+    describe('update todo', () => {
+        let createdTodo, action, generator;
+
+        before('create a dummy todo and start the generator', (done) => {
+            // create a dummy todo
+            postTodo(todoModel).then(t => {
+                createdTodo = t;
+                action = {
+                    type: types.UPDATE_TODO_CLICK,
+                    id: createdTodo._id,
+                    updates: {
+                        completed: true,
+                        updatedAt: Date.now()
+                    }
+                };
+                generator = sagas.updateTodo(action);
+                done();
+            })
+        });
+
+        it ('should execute the call method and return the effect', () => {
+            expect(generator.next().value).toEqual(call(putTodo, createdTodo._id, action.updates));
+        });
+
+        after('delete dummy todo', (done) => {
+            // lets get rid of the dummy todo.
+            deleteTodo(createdTodo._id)
+                .then(() => done())
+                .catch(e => {
+                    console.log('ERROR removing todo: '+e);
+                    done();
+                });
+        })
+
     });
 
 });
