@@ -65,7 +65,7 @@ export function* updateTodo(action) {
     try {
         const { id, updates } = action;
         const todo = yield call(putTodo, id, updates);
-        
+
         yield* handleServerResponse(
             todo,
             types.UPDATE_TODO_SUCCESS,

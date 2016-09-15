@@ -1,7 +1,6 @@
 import "babel-polyfill";
 import expect from "expect";
 import { put, call } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import * as sagas from "../app/actions/sagas";
 import * as types from "../app/actions/types";
 import { postTodo, deleteTodo, putTodo } from '../app/api';
@@ -109,6 +108,21 @@ describe('redux sagas', () => {
 
         it ('should execute the call method and return the effect', () => {
             expect(generator.next().value).toEqual(call(putTodo, createdTodo._id, action.updates));
+        });
+
+        it('should dispatch a UPDATE_TODO_SUCCESS action once the todo has been updated', (done) => {
+            putTodo(createdTodo._id, action.updates).then(todo => {
+                expect(generator.next(todo).value.PUT.action)
+                    .toEqual({
+                        type: types.UPDATE_TODO_SUCCESS,
+                        todo    
+                    });
+                done();
+            });
+        });
+
+        it('should be done', () => {
+            expect(generator.next().done).toEqual(true);
         });
 
         after('delete dummy todo', (done) => {
