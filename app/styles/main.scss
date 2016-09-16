@@ -38,6 +38,10 @@ button {
 	cursor: pointer;
 }
 
+.removeLinkDecoration {
+	text-decoration: none;
+}
+
 form {
 	margin: 10px 0;
 	padding-bottom: 10px;
@@ -56,9 +60,13 @@ form {
 	background: white;
 	border-radius: 5px;
 	overflow: hidden;
-
+	
+	&>a {
+		text-decoration: none;
+	}
 	h2 {
     	margin: 10px 0;
+		color: #111;
 		font-size: 20px;
 	}
 	p {

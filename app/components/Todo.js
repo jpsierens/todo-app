@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
+import { Link } from 'react-router';
+import handleUpdateStatus from '../helpers/handleUpdateStatus';
 
 const todoSource = {
     beginDrag(props) {
@@ -60,19 +62,10 @@ const connectDrop = (connect) => {
     return { connectDropTarget: connect.dropTarget() };
 };
 
-const handleUpdateStatus = (updateTodo, completed, _id) => {
-    const now = new Date();
-    const updatedAt = now.toISOString();
-
-    updateTodo(_id, {
-        updatedAt,
-        completed: !completed
-    });
-};
-
 const Todo = (props) => {
     const {
         _id,
+        index,
         name,
         note,
         completed,
@@ -88,34 +81,37 @@ const Todo = (props) => {
 
     return connectDragSource(connectDropTarget(
         <div className={`todo ${ completed ? 'done' : ''} ${isDragging ? 'dragging' : ''}`}>
-            <h2> { name } </h2>
-            <p> { note} </p>
-            <div>
-                <button
-                    className="btn-status"
-                    onClick={() => handleUpdateStatus(updateTodo, completed, _id)}>
+            <Link to={`/${index}`}>
+                <h2> { name } </h2>
+                <p> { note} </p>
+                <div>
+                    <button
+                        className="btn-status"
+                        onClick={(e) => handleUpdateStatus(e, updateTodo, completed, _id)}>
 
-                    Status: { completed ? 'Done' : 'Not Done'}
-                </button>
-                <span className="datetime">
-                    Last Updated: { time.toLocaleString() }
+                        Status: { completed ? 'Done' : 'Not Done'}
+                    </button>
+                    <span className="datetime">
+                        Last Updated: { time.toLocaleString() }
+                    </span>
+                </div>
+                <span
+                    className="close-todo"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onRemove(_id);
+                    }}>
+
+                    X
                 </span>
-            </div>
-            <span
-                className="close-todo"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    onRemove(_id);
-                }}>
-
-                X
-            </span>
+            </Link>
         </div>
     ));
 };
 
 Todo.propTypes = {
     _id: PropTypes.string,
+    index: PropTypes.number,
     name: PropTypes.string,
     note: PropTypes.string,
     completed: PropTypes.bool,
