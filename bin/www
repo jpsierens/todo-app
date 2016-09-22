@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../api');
+const app = require('../api/index');
 const debug = require('debug')('todo-api:server');
 const http = require('http');
 
