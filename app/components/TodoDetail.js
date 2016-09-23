@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import handleUpdateTodo from '../helpers/handleUpdateTodo';
 import withExit from '../helpers/withExit';
+import * as rules from '../rules';
 
 const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
     const { name, note, _id, completed, updatedAt } = todo;
@@ -15,11 +16,13 @@ const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
             <input
                 type="text"
                 value={name}
+                maxLength={`${rules.NAME_LENGTH}`}
                 ref={(ref) => { nameInput = ref; }}/>
 
             <textarea
                 rows="10"
                 cols="50"
+                maxLength={`${rules.NOTE_LENGTH}`}
                 ref={(ref) => { noteInput = ref; }}>
                 { note }
             </textarea>

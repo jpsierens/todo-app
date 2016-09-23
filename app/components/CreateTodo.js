@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import * as rules from '../rules';
 
 const handleSubmit = (nameInput, noteInput, onCreate) => {
     const name = nameInput.value;
@@ -19,7 +20,7 @@ const CreateTodo = ({ onCreate }) => {
         <form className="create-todo">
             <input
                 type="text"
-                maxLength="20"
+                maxLength={`${rules.NAME_LENGTH}`}
                 placeholder="Title"
                 required
                 ref={r => {
@@ -27,7 +28,7 @@ const CreateTodo = ({ onCreate }) => {
                 }} />
 
             <textarea
-                maxLength="200"
+                maxLength={`${rules.NOTE_INPUT}`}
                 placeholder="Note"
                 required
                 ref={r => {
