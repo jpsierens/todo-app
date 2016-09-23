@@ -19,9 +19,6 @@ input,
 textarea {
 	display: inline-block;
 	vertical-align: middle;
-	margin: 5px 5px;
-	padding: 3px;
-	height: 20px;
 	border-radius: 3px;
 	border: none;
 }
@@ -46,6 +43,15 @@ form {
 	margin: 10px 0;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #cec3bf;
+}
+
+.create-todo {
+	input,
+	textarea {
+		height: 20px;
+		margin: 5px 5px;
+		padding: 3px;
+	}
 }
 
 .todos {
@@ -89,6 +95,23 @@ form {
 	}
 	&.dragging {
 		opacity: 0.2;
+	}
+}
+
+.todo-detail {
+	input,
+	textarea {
+		display: block;
+		margin-bottom: 10px;
+		border: 1px solid #AAA;
+	}
+	input {
+		height: 20px;
+	}
+	.btn-save {
+		display: block;
+		float: right;
+		margin-top: 10px;
 	}
 }
 

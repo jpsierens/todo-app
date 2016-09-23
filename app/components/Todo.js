@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import { Link } from 'react-router';
-import handleUpdateStatus from '../helpers/handleUpdateStatus';
+import handleUpdateTodo from '../helpers/handleUpdateTodo';
 
 const todoSource = {
     beginDrag(props) {
@@ -87,7 +87,9 @@ const Todo = (props) => {
                 <div>
                     <button
                         className="btn-status"
-                        onClick={(e) => handleUpdateStatus(e, updateTodo, completed, _id)}>
+                        onClick={(e) => handleUpdateTodo(e, updateTodo, _id, {
+                            completed: !completed
+                        })}>
 
                         Status: { completed ? 'Done' : 'Not Done'}
                     </button>

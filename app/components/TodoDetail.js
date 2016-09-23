@@ -1,19 +1,34 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
-import handleUpdateStatus from '../helpers/handleUpdateStatus';
+import handleUpdateTodo from '../helpers/handleUpdateTodo';
+import withExit from '../helpers/withExit';
 
 const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
     const { name, note, _id, completed, updatedAt } = todo;
     const time = new Date(updatedAt);
 
+    let nameInput;
+    let noteInput;
+
     return (
-        <div className={`todo ${ completed ? 'done' : ''}`}>
-            <h2> { name } </h2>
-            <p> { note} </p>
+        <div className={`todo todo-detail ${ completed ? 'done' : ''}`}>
+            <input
+                type="text"
+                value={name}
+                ref={(ref) => { nameInput = ref; }}/>
+
+            <textarea
+                rows="10"
+                cols="50"
+                ref={(ref) => { noteInput = ref; }}>
+                { note }
+            </textarea>
             <div>
                 <button
                     className="btn-status"
-                    onClick={(e) => handleUpdateStatus(e, updateTodo, completed, _id)}>
+                    onClick={(e) => handleUpdateTodo(e, updateTodo, _id, {
+                        completed: !completed
+                    })}>
 
                     Status: { completed ? 'Done' : 'Not Done'}
                 </button>
@@ -21,6 +36,15 @@ const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
                     Last Updated: { time.toLocaleString() }
                 </span>
             </div>
+            <button
+                className="btn-save"
+                onClick={(e) => withExit(handleUpdateTodo)(router, '/', [e, updateTodo, _id, {
+                    name: nameInput.value,
+                    note: noteInput.value
+                }])}>
+
+                SAVE
+            </button>
             <span
                 className="close-todo"
                 onClick={(e) => {

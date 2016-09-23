@@ -7,6 +7,8 @@ const handleSubmit = (nameInput, noteInput, onCreate) => {
     if (!name || !note) return;
 
     onCreate({ name, note });
+    nameInput.value = '';
+    noteInput.value = '';
 };
 
 const CreateTodo = ({ onCreate }) => {

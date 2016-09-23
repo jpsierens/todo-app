@@ -1,12 +1,14 @@
-const handleUpdateStatus = (e, updateTodo, completed, _id) => {
+const handleUpdateTodo = (e, updateTodo, _id, changes) => {
     e.preventDefault();
     const now = new Date();
     const updatedAt = now.toISOString();
 
     updateTodo(_id, {
         updatedAt,
-        completed: !completed
+        ...changes
     });
+
+    return;
 };
 
-export default handleUpdateStatus;
+export default handleUpdateTodo;
