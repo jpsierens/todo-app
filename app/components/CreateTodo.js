@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import * as rules from '../rules';
 
-const handleSubmit = (nameInput, noteInput, onCreate) => {
+const handleFormSubmit = (nameInput, noteInput, onCreate) => {
     const name = nameInput.value;
     const note = noteInput.value;
 
@@ -40,7 +40,7 @@ const CreateTodo = ({ onCreate }) => {
                 type="submit"
                 onClick={(e) => {
                     e.preventDefault();
-                    handleSubmit(nameInput, noteInput, onCreate);
+                    handleFormSubmit(nameInput, noteInput, onCreate);
                 }}>
 
                 SUBMIT

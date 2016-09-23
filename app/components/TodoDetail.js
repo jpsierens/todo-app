@@ -4,6 +4,20 @@ import handleUpdateTodo from '../helpers/handleUpdateTodo';
 import withExit from '../helpers/withExit';
 import * as rules from '../rules';
 
+const handleSave = (router, nameInput, noteInput, params) => {
+    const newName = nameInput.value;
+    const newNote = noteInput.value;
+
+    if (!newName || !newNote) return;
+
+    params.push({
+        name: newName,
+        note: newNote
+    });
+
+    withExit(handleUpdateTodo)(router, '/', params);
+};
+
 const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
     const { name, note, _id, completed, updatedAt } = todo;
     const time = new Date(updatedAt);
@@ -13,19 +27,21 @@ const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
 
     return (
         <div className={`todo todo-detail ${ completed ? 'done' : ''}`}>
-            <input
-                type="text"
-                value={name}
-                maxLength={`${rules.NAME_LENGTH}`}
-                ref={(ref) => { nameInput = ref; }}/>
+            <form>
+                <input
+                    type="text"
+                    defaultValue={name}
+                    maxLength={`${rules.NAME_LENGTH}`}
+                    ref={(ref) => { nameInput = ref; }}/>
 
-            <textarea
-                rows="10"
-                cols="50"
-                maxLength={`${rules.NOTE_LENGTH}`}
-                ref={(ref) => { noteInput = ref; }}>
-                { note }
-            </textarea>
+                <textarea
+                    rows="10"
+                    cols="50"
+                    defaultValue={note}
+                    maxLength={`${rules.NOTE_LENGTH}`}
+                    ref={(ref) => { noteInput = ref; }}/>
+            </form>
+
             <div>
                 <button
                     className="btn-status"
@@ -41,10 +57,7 @@ const TodoDetail = ({ todo, updateTodo, onRemove, router }) => {
             </div>
             <button
                 className="btn-save"
-                onClick={(e) => withExit(handleUpdateTodo)(router, '/', [e, updateTodo, _id, {
-                    name: nameInput.value,
-                    note: noteInput.value
-                }])}>
+                onClick={(e) => handleSave(router, nameInput, noteInput, [e, updateTodo, _id])}>
 
                 SAVE
             </button>
