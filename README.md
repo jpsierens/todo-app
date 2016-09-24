@@ -13,3 +13,8 @@ You need 3 commands to develop in this app:
 ```
 npm run "test"
 ```
+
+## Build it
+```
+npm run "build"
+```
