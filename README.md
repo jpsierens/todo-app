@@ -11,7 +11,7 @@ You need 3 commands to develop in this app:
 
 ## Test it
 ```
-npm run "test"
+npm test
 ```
 
 ## Build it
