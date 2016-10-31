@@ -3,6 +3,6 @@ node_js:
   - '6'
 services:
   - mongodb
-before_script:
-  - sleep 15
+script:
   - npm run "api"
+  - npm test
