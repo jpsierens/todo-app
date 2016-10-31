@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - '6'
+services:
+  - mongod
 before_script:
   - npm start
   - npm run "api"
