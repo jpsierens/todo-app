@@ -4,4 +4,5 @@ node_js:
 services:
   - mongod
 before_script:
+  - sleep 15
   - npm run "api"
