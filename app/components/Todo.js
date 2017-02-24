@@ -81,7 +81,7 @@ const Todo = (props) => {
 
     return connectDragSource(connectDropTarget(
         <div className={`todo ${ completed ? 'done' : ''} ${isDragging ? 'dragging' : ''}`}>
-            <Link to={`/${index}`}>
+            <Link to={`todos/${index}`}>
                 <h2> { name } </h2>
                 <p> { note} </p>
                 <div>
